@@ -1,35 +1,30 @@
 .PHONY: all
+
 all:
 	@echo "Run my targets individually!"
 
-.PHONY: env
-.ONESHELL:
-env:
-	test -d env || python3 -m venv env
-	. env/bin/activate
-	pip install -r requirements-dev.txt
+venv: venv/touchfile
 
+venv/touchfile: requirements-dev.txt
+	test -d venv || virtualenv venv
+	. venv/bin/activate; pip install -Ur requirements-dev.txt
+	touch venv/touchfile
 
 .PHONY: develop
-.ONESHELL:
-develop: env
-	. env/bin/activate
-	maturin develop
+develop: venv
+	. venv/bin/activate; maturin develop
 
 .PHONY: test
-.ONESHELL:
 test: develop
-	. env/bin/activate
-	python -m pytest tests/
+	. venv/bin/activate; pytest tests
 
 .PHONY: build
-.ONESHELL:
-build: env
-	. env/bin/activate
-	maturin build
+build: venv
+	. venv/bin/activate; maturin build
 
 .PHONY: dist
-.ONESHELL:
-dist: env
-	. env/bin/activate
-	docker run --rm -v $(shell pwd):/io konstin2/maturin build --release --strip
+dist: venv
+	( \
+		. venv/bin/activate; \
+		docker run --rm -v $(shell pwd):/io konstin2/maturin build --release --strip; \
+	)
