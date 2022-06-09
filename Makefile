@@ -7,7 +7,7 @@ all:
 env:
 	test -d env || python3 -m venv env
 	. env/bin/activate
-	pip install maturin
+	pip install -r requirements-dev.txt
 
 
 .PHONY: develop
@@ -20,7 +20,7 @@ develop: env
 .ONESHELL:
 test: develop
 	. env/bin/activate
-	python -m unittest test/test_procmaps.py
+	python -m pytest tests/
 
 .PHONY: build
 .ONESHELL:

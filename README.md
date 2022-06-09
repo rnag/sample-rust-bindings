@@ -1,38 +1,31 @@
-procmaps.py
+TODO.py
 ===========
 
-[![Build Status](https://img.shields.io/github/workflow/status/woodruffw/procmaps.py/CI/master)](https://github.com/woodruffw/procmaps.py/actions?query=workflow%3ACI)
-[![Downloads](https://pepy.tech/badge/procmaps)](https://pepy.tech/project/procmaps)
+[![Build Status](https://img.shields.io/github/workflow/status/USER/TODO.py/CI/master)](https://github.com/USER/TODO.py/actions?query=workflow%3ACI)
+[![Downloads](https://pepy.tech/badge/TODO)](https://pepy.tech/project/TODO)
 
-Python bindings for [procmaps.rs](https://github.com/woodruffw/procmaps.rs).
+Python bindings for Rust code.
 
 ## Installation
 
-procmaps.py is available for Python 3.7+ via pip:
+TODO.py is available for Python 3.7+ via pip:
 
 ```bash
-$ pip install procmaps
+$ pip install TODO
 ```
 
 ## Usage
 
 ```python
-import procmaps
+import TODO
 
-# also: from_path, from_str
-maps = procmaps.from_pid(9001)
-for map_ in maps:
-    # `in` can be used to check address inclusion
-    if 0xfeedface in map_:
-        print("this map contains some address!")
-
-    # see dict(map_) for all attributes
-    print(f"{map_.begin_address}: {map_.pathname}")
+result = TODO.my_function(123)
+print(result)
 ```
 
 ## Development
 
-*procmaps.py* uses [PyO3](https://github.com/PyO3/pyo3) for binding Rust
+*TODO.py* uses [PyO3](https://github.com/PyO3/pyo3) for binding Rust
 to Python. It uses [Maturin](https://github.com/PyO3/maturin) to coerce the
 Rust build into a `pip` and PyPI-compatible wheel.
 
@@ -44,4 +37,4 @@ $ make develop
 $ source env/bin/activate
 ```
 
-A local build of *procmaps.py* will be created and installed in your virtual environment.
+A local build of *TODO.py* will be created and installed in your virtual environment.
